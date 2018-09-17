@@ -106,7 +106,7 @@ class XmlToArray
 
             foreach ($children as $child) {
                 if (array_key_exists($child->nodeName, $result)) {
-                    if (!is_array($result[$child->nodeName])) {
+                    if (!is_array($result[$child->nodeName]) || !isset($result[$child->nodeName][0])) {
                         $result[$child->nodeName] = [$result[$child->nodeName]];
                     }
 

@@ -105,7 +105,15 @@ class XmlToArray
             $children = $this->document->childNodes;
 
             foreach ($children as $child) {
-                $result[$child->nodeName] = $this->convertDomElement($child);
+                if (array_key_exists($child->nodeName, $result)) {
+                    if (!is_array($result[$child->nodeName])) {
+                        $result[$child->nodeName] = [$result[$child->nodeName]];
+                    }
+
+                    $result[$child->nodeName][] = $this->convertDomElement($child);
+                } else {
+                    $result[$child->nodeName] = $this->convertDomElement($child);
+                }
             }
         }
 

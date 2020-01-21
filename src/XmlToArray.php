@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types = 1);
+declare (strict_types=1);
 
 namespace Vyuldashev\XmlToArray;
 
@@ -30,9 +30,11 @@ class XmlToArray
 
     protected function convertAttributes(DOMNamedNodeMap $nodeMap)
     {
+
         if ($nodeMap->length === 0) {
             return null;
         }
+
 
         $result = [];
 
@@ -52,13 +54,14 @@ class XmlToArray
                 return false;
             }
         }
+
         return true;
     }
 
     protected function convertDomElement(DOMElement $element)
     {
         $sameNames = false;
-        $result = $this->convertAttributes($element->attributes);
+        $result    = $this->convertAttributes($element->attributes);
 
         if ($element->childNodes->length > 1) {
             $childNodeNames = [];
@@ -79,8 +82,7 @@ class XmlToArray
                 continue;
             }
             if ($node instanceof DOMText && !empty(trim($node->textContent))) {
-                $result = $node->textContent;
-
+                $result['_value']                = $node->textContent;
                 continue;
             }
             if ($node instanceof DOMElement) {
